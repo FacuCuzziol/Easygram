@@ -34,3 +34,10 @@ a{
 .item{
   width: 30%;
 }
+
+.home{
+  max-width: 1200px;
+  height: max-content;
+  margin:26px auto;
+}
+
