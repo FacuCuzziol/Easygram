@@ -1,44 +1,41 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+
 
 const Home = () =>{
+    const [data,setData] = useState([])
+    useEffect(()=>{
+        fetch('http://localhost:5000/allpost',{
+            headers:{
+                'Authorization':"Bearer "+localStorage.getItem("jwt")
+            }
+        })
+        .then(res=>res.json())
+        .then(result=>{
+            setData(result.posts)
+        })
+    },[])
     return(
         <div className="home">
-            <div className="card home-card">
-                <h5>Jefferson Gutierritoz</h5>
-                <div className="card-image">
-                    <img src="https://www.jeep.com//content/dam/fca-brands/na/jeep/en_us/2020/wrangler/gallery/exterior/Gallery-Exterior-White-Colorado-Sunset-Desktop.jpg"/>
-                </div>
-                <div className="card-content">
-                <i className="material-icons">favorite</i>
-                    <h6>La Jeepeta</h6>
-                    <p>Aca con mi nueva jeepeta breeeeeo</p>
-                    <input type="text" placeholder="add a comment"/>
-                </div>
-            </div>
-            <div className="card home-card">
-                <h5>Jefferson Gutierritoz</h5>
-                <div className="card-image">
-                    <img src="https://www.jeep.com//content/dam/fca-brands/na/jeep/en_us/2020/wrangler/gallery/exterior/Gallery-Exterior-White-Colorado-Sunset-Desktop.jpg"/>
-                </div>
-                <div className="card-content">
-                <i className="material-icons">favorite</i>
-                    <h6>La Jeepeta</h6>
-                    <p>Aca con mi nueva jeepeta breeeeeo</p>
-                    <input type="text" placeholder="add a comment"/>
-                </div>
-            </div>
-            <div className="card home-card">
-                <h5>Jefferson Gutierritoz</h5>
-                <div className="card-image">
-                    <img src="https://www.jeep.com//content/dam/fca-brands/na/jeep/en_us/2020/wrangler/gallery/exterior/Gallery-Exterior-White-Colorado-Sunset-Desktop.jpg"/>
-                </div>
-                <div className="card-content">
-                <i className="material-icons">favorite</i>
-                    <h6>La Jeepeta</h6>
-                    <p>Aca con mi nueva jeepeta breeeeeo</p>
-                    <input type="text" placeholder="add a comment"/>
-                </div>
-            </div>
+            {
+                data.map(item=>{
+                    console.log(item)
+                    return(
+                        <div className="card home-card key={item._id}">
+                            <h5>{item.postedBy.name}</h5>
+                            <div className="card-image">
+                                <img src={item.photo}/>
+                            </div>
+                            <div className="card-content">
+                            <i className="material-icons">favorite</i>
+                                <h6>{item.title}</h6>
+                                <p>{item.body}</p>
+                                <input type="text" placeholder="add a comment"/>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+            
         </div>
 
         
