@@ -18,13 +18,13 @@ const Routing = ()=>{
 
     if(user){
       dispatch({type:"USER",payload:user})
-      history.push('/')
+      
     }else{
       history.push('/signin')
     }
   },[])
   return(
-    <switch>
+    <Switch>
       <Route exact path="/">
         <Home/>
       </Route>
@@ -40,7 +40,7 @@ const Routing = ()=>{
       <Route path="/create">
         <CreatePost/>
       </Route>
-    </switch>
+    </Switch>
   )
 }
 function App() {
