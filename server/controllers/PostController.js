@@ -42,3 +42,35 @@ exports.getmypost = (req,res,next) =>{
         console.log(err);
     })
 }
+
+exports.likePost = (req,res,next) =>{
+    Post.findByIdAndUpdate(req.body.postId,{
+        $push:{likes:req.user._id}
+        },
+        {
+            new:true
+        }).exec((err,result)=>{
+            if(err){
+                return res.status(422).json({error:err})
+            }
+            else{
+                res.json(result)
+            }
+        })
+}
+
+exports.unlikePost = (req,res,next) =>{
+    Post.findByIdAndUpdate(req.body.postId,{
+        $pull:{likes:req.user._id}
+        },
+        {
+            new:true
+        }).exec((err,result)=>{
+            if(err){
+                return res.status(422).json({error:err})
+            }
+            else{
+                res.json(result)
+            }
+        })
+}
