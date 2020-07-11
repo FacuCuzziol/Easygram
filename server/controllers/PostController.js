@@ -24,6 +24,7 @@ exports.createpost = (req,res,next)=>{
 exports.getallposts = (req,res,next)=>{
     Post.find()
     .populate("postedBy","_id name")
+    .populate("comments.postedBy","_id name")
     .then(posts =>{
         res.json({posts})
     })
@@ -87,6 +88,7 @@ exports.comment = (req,res,next) =>{
             new:true
         })
         .populate("comments.postedBy","_id name")
+        .populate("postedBy","_id name")
         .exec((err,result)=>{
             if(err){
                 return res.status(422).json({error:err})
