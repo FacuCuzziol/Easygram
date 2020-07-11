@@ -4,9 +4,11 @@ export const reducer = (state,action) =>{
     if(action.type=="USER") {
         return action.payload
     }
-    else{
-        return state
+    if(action.type="CLEAR"){
+        return null
     }
+    return state
+    
 }
 
 
