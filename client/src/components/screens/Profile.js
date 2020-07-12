@@ -24,7 +24,7 @@ const Profile = () =>{
             }}>
                 <div>
                     <img style={{width:"160px", height:"160px", borderRadius:"80px"}}
-                    src="https://ctxt.es/images/cache/800x540/nocrop/images%7Ccms-image-000020424.jpg"
+                    src={state?state.pic:"loading"}
                     />
                 </div>
                 <div>

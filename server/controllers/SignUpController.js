@@ -4,7 +4,7 @@ const User = mongoose.model("User")
 const bcrypt = require('bcryptjs')
 exports.signup = (req,res,next)=>{
     console.log(req.body.name);
-    const {name,email,password} = req.body
+    const {name,email,password,pic} = req.body
     if(!email || !name || !password){
         return res.status(422).json({error:"Please add all the required fields"});
     }
@@ -18,7 +18,8 @@ exports.signup = (req,res,next)=>{
             const user = new User({
                 email,
                 password:hashedpassword,
-                name
+                name,
+                pic
             })
             user.save()
             .then(user =>{

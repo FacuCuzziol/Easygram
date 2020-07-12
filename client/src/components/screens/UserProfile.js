@@ -3,9 +3,10 @@ import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
 const Profile = () =>{
     const [userProfile,setProfile] = useState(null)
-    const [showfollow,setShowFollow] = useState(true)
+    
     const {state,dispatch} = useContext(UserContext);
     const {userid} = useParams()
+    const [showfollow,setShowFollow] = useState(state?!state.following.includes(userid):true)
     
     useEffect(()=>{
         fetch(`http://localhost:5000/user/${userid}`,{
@@ -91,7 +92,7 @@ const Profile = () =>{
         }}>
             <div>
                 <img style={{width:"160px", height:"160px", borderRadius:"80px"}}
-                src="https://ctxt.es/images/cache/800x540/nocrop/images%7Ccms-image-000020424.jpg"
+                src={userProfile.user.pic}
                 />
             </div>
             <div>
