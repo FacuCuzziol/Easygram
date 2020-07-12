@@ -6,7 +6,7 @@ const Home = () =>{
     const {state,dispatch} = useContext(UserContext)
     const [data,setData] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/allpost',{
+        fetch('http://localhost:5000/getsubpost',{
             headers:{
                 'Authorization':"Bearer "+localStorage.getItem("jwt")
             }
