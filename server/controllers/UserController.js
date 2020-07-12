@@ -19,7 +19,8 @@ exports.getUser = (req,res,next)=>{
 }
 
 exports.follow = (req,res,next)=>{
-    User.findOneAndUpdate(req.body.followId,{
+    console.log(req)
+    User.findByIdAndUpdate(req.body.followId,{
         $push:{followers:req.user._id}
     },{
         new:true
@@ -29,7 +30,7 @@ exports.follow = (req,res,next)=>{
         }
         User.findByIdAndUpdate(req.user._id,{
             $push:{following:req.body.followId}
-        },{new:true}).then(result=>{
+        },{new:true}).select("-password").then(result=>{
             res.json(result)
         }).catch(err=>{
             return res.status(422).json({error:err})
@@ -38,7 +39,7 @@ exports.follow = (req,res,next)=>{
 }
 
 exports.unfollow = (req,res,next)=>{
-    User.findOneAndUpdate(req.body.unfollowId,{
+    User.findByIdAndUpdate(req.body.unfollowId,{
         $pull:{followers:req.user._id}
     },{
         new:true
@@ -48,7 +49,7 @@ exports.unfollow = (req,res,next)=>{
         }
         User.findByIdAndUpdate(req.user._id,{
             $pull:{following:req.body.unfollowId}
-        },{new:true}).then(result=>{
+        },{new:true}).select("-password").then(result=>{
             res.json(result)
         }).catch(err=>{
             return res.status(422).json({error:err})
