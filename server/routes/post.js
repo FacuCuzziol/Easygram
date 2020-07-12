@@ -9,4 +9,6 @@ router.put('/like',requireLogin,PostController.likePost)
 router.put('/unlike',requireLogin,PostController.unlikePost)
 router.put('/comment',requireLogin,PostController.comment)
 router.delete('/deletepost/:postId',requireLogin,PostController.deletePost)
+router.get('/getsubpost',requireLogin,PostController.getsubpost)
+
 module.exports = router
