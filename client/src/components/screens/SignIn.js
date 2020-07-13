@@ -33,6 +33,7 @@ const SignIn = () =>{
                 dispatch({type:"USER",payload:JSON.stringify(data.user)})
                 M.toast({html:"sign In success",classes:"#66bb6a green lighten-1"})
                 history.push('/')
+                window.location.reload()
             }
             console.log(data)
         }).catch(err=>{
