@@ -16,6 +16,8 @@ services:
             - ./server/routes:/srv/app/back/routes
             - ./server/middleware:/srv/app/back/middleware
             - ./server/keys.js:/srv/app/back/keys.js
+        networks: 
+            - webappnetwork
         command: npm startserver
     client:
         build: ./client
@@ -30,6 +32,10 @@ services:
         tty: true
         links: 
             - server
+        networks: 
+            - webappnetwork
         command: npm start
-
+networks: 
+    webappnetwork:
+        driver: bridge
 
