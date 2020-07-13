@@ -1,5 +1,5 @@
 # EasyGram
-## Simple Instagram application using Node JS, React and MongoDB
+## Simple Instagram-like application using Node JS, React and MongoDB
 
 
 ### Backend
