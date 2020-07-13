@@ -18,7 +18,7 @@ exports.signin = (req,res,next)=>{
         .then(doMatch=>{
             if(doMatch){
                 //res.json({message:"Succesfully signed in"})
-                const token = jwt.sign({_id:savedUser._id},JWT_SECRET)
+                const token = jwt.sign({_id:savedUser._id},process.env.JWT_SECRET || JWT_SECRET)
                 const {_id,name,email,followers,following,pic} =savedUser
                 res.json({token,user:{_id,name,email,followers,following,pic}})
             }
