@@ -27,11 +27,24 @@ const Profile = () =>{
         })
         .then(res=>res.json())
         .then(data=>{
-            setUrl(data.url)
-            console.log(data)
-            localStorage.setItem("user",JSON.stringify({...state,pic:data.url}))
-            dispatch({type:"UPDATEPIC",payload:data.url})
-            window.location.reload()
+            //localStorage.setItem("user",JSON.stringify({...state,pic:data.url}))
+            //dispatch({type:"UPDATEPIC",payload:data.url})
+            fetch('http://localhost:5000/updatepic',{
+                method:"put",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":"Bearer "+localStorage.getItem("jwt")
+                },
+                body:JSON.stringify({
+                    pic:data.url
+                })
+            }).then(res=>res.json())
+            .then(result=>{
+                console.log(result)
+                localStorage.setItem("user",JSON.stringify({...state,pic:result.pic}))
+                dispatch({type:"UPDATEPIC",payload:result.pic})
+            })
+            //window.location.reload()
         })
         .catch(err=>{
             console.log(err)
