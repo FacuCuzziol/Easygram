@@ -6,7 +6,7 @@ const Home = () =>{
     const {state,dispatch} = useContext(UserContext)
     const [data,setData] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/allpost',{
+        fetch('http://localhost:5000/getsubpost',{
             headers:{
                 'Authorization':"Bearer "+localStorage.getItem("jwt")
             }
@@ -119,17 +119,12 @@ const Home = () =>{
                     console.log(item)
                     return(
                         <div className="card home-card key={item._id}">
-                            <div>
-                            <img style={{width:"80px", height:"80px", borderRadius:"80px",padding:"15px"}}
-                            src={state?state.pic:"loading"}
-                            />
-                            <h5 style={{padding:"15px",verticalAlign:"center",display:"inline"}}><Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id :"/profile"}>{item.postedBy.name}</Link>{item.postedBy._id == state._id
+                            <h5 style={{padding:"15px"}}><Link to={item.postedBy._id !== state._id?"/profile/"+item.postedBy._id :"/profile"}>{item.postedBy.name}</Link>{item.postedBy._id == state._id
                             && <i className="material-icons" style={{float:"right"}}
                             onClick={()=>deletePost(item._id)}
                             
                             >delete</i>
                             }</h5>
-                            </div>
                             <div className="card-image">
                                 <img src={item.photo}/>
                             </div>
