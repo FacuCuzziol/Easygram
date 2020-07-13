@@ -8,5 +8,5 @@ router.get('/user/:id',requireLogin,UserController.getUser)
 router.put('/follow',requireLogin,UserController.follow)
 router.put('/unfollow',requireLogin,UserController.unfollow)
 router.put('/updatepic',requireLogin,UserController.updatepic)
-
+router.post('/search-users',UserController.searchUsers)
 module.exports = router

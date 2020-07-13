@@ -25,6 +25,7 @@ exports.getallposts = (req,res,next)=>{
     Post.find()
     .populate("postedBy","_id name")
     .populate("comments.postedBy","_id name")
+    .sort('-createdAt')
     .then(posts =>{
         res.json({posts})
     })
@@ -121,6 +122,7 @@ exports.getsubpost = (req,res,next) =>{
     Post.find({postedBy:{$in:req.user.following}})
     .populate("postedBy","_id name")
     .populate("comments.postedBy","_id name")
+    .sort('-createdAt')
     .then(posts=>{
         res.json({posts})
     })
